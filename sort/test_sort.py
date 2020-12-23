@@ -25,6 +25,10 @@ class SortTest(unittest.TestCase):
         sort_function = algorithms.insertion_sort
         self._test_sort(sort_function)
 
+    def test_selection_sort(self):
+        sort_function = algorithms.selection_sort
+        self._test_sort(sort_function)
+
     def _test_sort(self, sort_function):
         for i in range(len(self.entries)):
             with self.subTest(i=i):

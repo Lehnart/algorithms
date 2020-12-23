@@ -2,6 +2,11 @@ from typing import List
 
 
 def insertion_sort(array: List):
+    """
+    Implementation of insertion sort. the sort is not in place.
+    :param array: array to be sorted
+    :return: sorted array
+    """
 
     def insert(value, sorted_sub_array: List):
         """
@@ -19,4 +24,18 @@ def insertion_sort(array: List):
     sorted_array = []
     for i in range(len(array)):
         insert(array[i], sorted_array)
+    return sorted_array
+
+
+def selection_sort(array: List):
+    """
+    Implementation of selection sort. the sort is not in place.
+    :param array: array to be sorted
+    :return: sorted array
+    """
+
+    sorted_array = []
+    for i in range(len(array)):
+        index_min = array.index(min(array))
+        sorted_array.append(array.pop(index_min))
     return sorted_array
