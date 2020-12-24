@@ -39,3 +39,39 @@ def selection_sort(array: List):
         index_min = array.index(min(array))
         sorted_array.append(array.pop(index_min))
     return sorted_array
+
+
+def heap_sort(array: List):
+    """
+    Implementation of heap sort. the sort is in place.
+    :param array: array to be sorted
+    """
+
+    def heapify(array: List, i: int):
+        """
+         Suppose that the array[0:i-1] is structures as a heap, adding the array[i] in ordre to keep a heap structure.
+        :param array: array with a heap structure up to i-1
+        :param i: element index to add to heap structure
+        :return: nothing, everything is done in place
+        """
+        if i == 0:
+            return
+
+        curr = array[i]
+        up_index = (i - 1) // 2
+        up = array[up_index]
+        if up < curr:
+            array[up_index], array[i] = array[i], array[up_index]
+            heapify(array, up_index)
+
+    # change array structure as heap
+    for i in range(1, len(array)):
+        heapify(array, i)
+
+    # swap top of heap on right of array, and restructure as a heap
+    for i in range(len(array) - 1, 0, -1):
+        array[i], array[0] = array[0], array[i]
+        for j in range(1, i):
+            heapify(array, j)
+
+    return array
