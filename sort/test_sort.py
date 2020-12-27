@@ -7,7 +7,7 @@ import algorithms
 MIN_INT = -1000
 MAX_INT = 1000
 MIN_LENGTH = 1
-MAX_LENGTH = 250
+MAX_LENGTH = 500
 
 
 class SortTest(unittest.TestCase):
@@ -31,6 +31,10 @@ class SortTest(unittest.TestCase):
 
     def test_heap_sort(self):
         sort_function = algorithms.heap_sort
+        self._test_sort(sort_function)
+
+    def test_quick_sort(self):
+        sort_function = algorithms.quick_sort
         self._test_sort(sort_function)
 
     def _test_sort(self, sort_function):

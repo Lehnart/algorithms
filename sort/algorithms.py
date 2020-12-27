@@ -47,31 +47,62 @@ def heap_sort(array: List):
     :param array: array to be sorted
     """
 
-    def heapify(array: List, i: int):
+    def heapify(heap_array: List, heap_size: int, root_index: int):
         """
          Suppose that the array[0:i-1] is structures as a heap, adding the array[i] in ordre to keep a heap structure.
-        :param array: array with a heap structure up to i-1
-        :param i: element index to add to heap structure
+        :param heap_array: array with a heap structure up to i-1
+        :param heap_size : size of heap, smaller or equal to array size
+        :param root_index: element index to add to heap structure
         :return: nothing, everything is done in place
         """
-        if i == 0:
-            return
 
-        curr = array[i]
-        up_index = (i - 1) // 2
-        up = array[up_index]
-        if up < curr:
-            array[up_index], array[i] = array[i], array[up_index]
-            heapify(array, up_index)
+        largest = root_index
+        left = 2 * root_index + 1
+        right = 2 * root_index + 2
+
+        if left < heap_size and heap_array[left] > heap_array[largest]:
+            largest = left
+        if right < heap_size and heap_array[right] > heap_array[largest]:
+            largest = right
+
+        if largest != root_index:
+            heap_array[root_index], heap_array[largest] = heap_array[largest], heap_array[root_index]
+            heapify(heap_array, heap_size, largest)
 
     # change array structure as heap
-    for i in range(1, len(array)):
-        heapify(array, i)
+    n = len(array)
+    for i in range((n // 2) - 1, -1, -1):
+        heapify(array, n, i)
 
     # swap top of heap on right of array, and restructure as a heap
     for i in range(len(array) - 1, 0, -1):
         array[i], array[0] = array[0], array[i]
-        for j in range(1, i):
-            heapify(array, j)
+        heapify(array, i, 0)
 
     return array
+
+
+def quick_sort(array: List):
+    """
+    Implementation of quick sort. the sort is in place.
+    :param array: array to be sorted
+    """
+
+    if len(array) <= 1:
+        return array
+    pivot_index = 0
+    pivot = array[pivot_index]
+    pivoted_array = [pivot]
+    for el in array[1:]:
+        if el > pivot:
+            pivoted_array.append(el)
+        else:
+            pivoted_array.insert(0, el)
+            pivot_index += 1
+
+    left_array = pivoted_array[:pivot_index]
+    right_array = pivoted_array[pivot_index + 1:]
+    sorted_left_array = quick_sort(left_array)
+    sorted_right_array = quick_sort(right_array)
+
+    return sorted_left_array + [pivot] + sorted_right_array
