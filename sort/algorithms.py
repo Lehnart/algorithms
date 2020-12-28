@@ -106,3 +106,51 @@ def quick_sort(array: List):
     sorted_right_array = quick_sort(right_array)
 
     return sorted_left_array + [pivot] + sorted_right_array
+
+
+def merge_sort(array: List):
+    """
+    Implementation of merge sort. the sort is not in place.
+    :param array: array to be sorted
+    """
+
+    if len(array) <= 1:
+        return array
+
+    if len(array) == 2:
+        if array[0] <= array[1]:
+            return array
+        array.reverse()
+        return array
+
+    i = len(array) // 2
+    array1, array2 = array[:i].copy(), array[i:].copy()
+    array1, array2 = merge_sort(array1), merge_sort(array2)
+
+    i1, i2 = 0, 0
+    cur1, cur2 = array1[i1], array2[i2]
+    sorted_array = []
+    while i1 < len(array1) or i2 < len(array2):
+        if i1 < len(array1) and i2 < len(array2) :
+            if cur1 <= cur2 :
+                sorted_array.append(cur1)
+                i1 += 1
+                cur1 = None if i1 >= len(array1) else array1[i1]
+
+            elif cur2 <= cur1 :
+                sorted_array.append(cur2)
+                i2 += 1
+                cur2 = None if i2 >= len(array2) else array2[i2]
+
+        else :
+            if i2 == len(array2):
+                sorted_array.append(cur1)
+                i1 += 1
+                cur1 = None if i1 >= len(array1) else array1[i1]
+
+            elif i1 == len(array1):
+                sorted_array.append(cur2)
+                i2 += 1
+                cur2 = None if i2 >= len(array2) else array2[i2]
+
+    return sorted_array

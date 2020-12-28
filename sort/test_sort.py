@@ -7,7 +7,7 @@ import algorithms
 MIN_INT = -1000
 MAX_INT = 1000
 MIN_LENGTH = 1
-MAX_LENGTH = 500
+MAX_LENGTH = 400
 
 
 class SortTest(unittest.TestCase):
@@ -36,6 +36,11 @@ class SortTest(unittest.TestCase):
     def test_quick_sort(self):
         sort_function = algorithms.quick_sort
         self._test_sort(sort_function)
+
+    def test_merge_sort(self):
+        sort_function = algorithms.merge_sort
+        self._test_sort(sort_function)
+
 
     def _test_sort(self, sort_function):
         for i in range(len(self.entries)):
