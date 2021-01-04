@@ -108,6 +108,15 @@ def quick_sort(array: List):
     return sorted_left_array + [pivot] + sorted_right_array
 
 
+def python_sort(array: List):
+    """
+    Use the built in sort function of python
+    :param array: array to be sorted
+    """
+    array.sort()
+    return array
+
+
 def merge_sort(array: List):
     """
     Implementation of merge sort. the sort is not in place.
@@ -131,18 +140,18 @@ def merge_sort(array: List):
     cur1, cur2 = array1[i1], array2[i2]
     sorted_array = []
     while i1 < len(array1) or i2 < len(array2):
-        if i1 < len(array1) and i2 < len(array2) :
-            if cur1 <= cur2 :
+        if i1 < len(array1) and i2 < len(array2):
+            if cur1 <= cur2:
                 sorted_array.append(cur1)
                 i1 += 1
                 cur1 = None if i1 >= len(array1) else array1[i1]
 
-            elif cur2 <= cur1 :
+            elif cur2 <= cur1:
                 sorted_array.append(cur2)
                 i2 += 1
                 cur2 = None if i2 >= len(array2) else array2[i2]
 
-        else :
+        else:
             if i2 == len(array2):
                 sorted_array.append(cur1)
                 i1 += 1

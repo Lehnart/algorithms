@@ -41,6 +41,9 @@ class SortTest(unittest.TestCase):
         sort_function = algorithms.merge_sort
         self._test_sort(sort_function)
 
+    def test_python_sort(self):
+        sort_function = algorithms.python_sort
+        self._test_sort(sort_function)
 
     def _test_sort(self, sort_function):
         for i in range(len(self.entries)):
