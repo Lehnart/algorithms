@@ -18,12 +18,16 @@ class SearchTest(unittest.TestCase):
         search_function = algorithms.sequential_search
         self._test_search(search_function)
 
+    def test_binary_search(self):
+        search_function = algorithms.binary_search
+        self._test_search(search_function)
+
     def test_python_search(self):
         search_function = algorithms.python_search
         self._test_search(search_function)
 
-    def test_python_sorted_search(self):
-        search_function = algorithms.python_sorted_search
+    def test_python_binary_search(self):
+        search_function = algorithms.python_binary_search
         self._test_search(search_function)
 
     def _test_search(self, search_function):

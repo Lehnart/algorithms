@@ -28,7 +28,32 @@ def python_search(el: int, array: List) -> bool:
     return el in array
 
 
-def python_sorted_search(el: int, array: List) -> bool:
+def binary_search(el: int, array: List) -> bool:
+    """
+    Use the built in function of sort and my implementation of binary search.
+    :param el : searched element.
+    :param array: array to be searched.
+    :return: is el in array ?
+    """
+
+    array.sort()
+    sub_array = array
+    while True:
+        if len(sub_array) == 0:
+            return False
+        index = len(sub_array) // 2
+        cur = sub_array[index]
+        if cur == el:
+            return True
+        elif cur > el:
+            sub_array = sub_array[:index]
+            continue
+        else:
+            sub_array = sub_array[index + 1:]
+            continue
+
+
+def python_binary_search(el: int, array: List) -> bool:
     """
     Use the built in function of sort and binary search.
     :param el : searched element.

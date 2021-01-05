@@ -107,6 +107,25 @@ def quick_sort(array: List):
 
     return sorted_left_array + [pivot] + sorted_right_array
 
+def bucket_sort(array: List):
+    """
+    Implementation of bucket sort. the sort is not in place.
+    :param array: array to be sorted
+    """
+
+    int_max = max(array)
+    int_min = min(array)
+
+    buckets = [ 0 for i in range(int_max-int_min+1)]
+    for el in array:
+        buckets[el-int_min] += 1
+
+    sorted_array = []
+    for i in range(len(buckets)) :
+        for j in range(buckets[i]):
+            sorted_array.append(i+int_min)
+    return sorted_array
+
 
 def python_sort(array: List):
     """
