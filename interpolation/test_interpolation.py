@@ -1,13 +1,15 @@
 import random
 import unittest
 
+from interpolation import lagrangian_interpolation
+
 MIN_X = -1000.
 MAX_X = 1000.
 MIN_Y = -1000.
 MAX_Y = 1000.
 
 MIN_N_POINTS = 3
-MAX_N_POINTS = 1000
+MAX_N_POINTS = 100
 
 
 class InterpolationTest(unittest.TestCase):
@@ -18,18 +20,22 @@ class InterpolationTest(unittest.TestCase):
         for xs in self.xs_list:
             xs.sort()
 
-    def _test_interpol(self, interpol_function):
+    def test_lagrangian_interpolation(self):
+        interpolation_function = lagrangian_interpolation.lagrange_polynom
+        self._test_interpol(interpolation_function)
+
+    def _test_interpol(self, interpol_method):
+
         for i in range(len(self.xs_list)):
             with self.subTest(i=i):
                 xs = self.xs_list[i]
                 ys = self.ys_list[i]
-
+                interpol_function = interpol_method(xs,ys)
                 for j in range(len(xs)):
                     x, y = xs[j], ys[j]
                     y_interpol = interpol_function(x)
                     self.assertAlmostEqual(y, y_interpol)
 
-                    if j == 0:
-                        continue
-                    for k in range(1, 10):
-                        self.assertIsInstance(interpol_function(x + 0.1 * (xs[j + 1] - xs[j])), float)
+                for k in range(1, 10):
+                    rx = xs[0]+ (random.random()*(xs[-1]-xs[0]))
+                    self.assertIsInstance(interpol_function(rx), float)
