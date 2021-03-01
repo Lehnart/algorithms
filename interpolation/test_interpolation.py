@@ -1,6 +1,6 @@
 import random
 import unittest
-
+import pygame
 from interpolation import lagrangian_interpolation
 
 MIN_X = -1000.
@@ -9,7 +9,7 @@ MIN_Y = -1000.
 MAX_Y = 1000.
 
 MIN_N_POINTS = 3
-MAX_N_POINTS = 100
+MAX_N_POINTS = 75
 
 
 class InterpolationTest(unittest.TestCase):
@@ -22,6 +22,10 @@ class InterpolationTest(unittest.TestCase):
 
     def test_lagrangian_interpolation(self):
         interpolation_function = lagrangian_interpolation.lagrange_polynom
+        self._test_interpol(interpolation_function)
+
+    def test_lagrangian_interval_interpolation(self):
+        interpolation_function = lagrangian_interpolation.lagrange_interval_polynom
         self._test_interpol(interpolation_function)
 
     def _test_interpol(self, interpol_method):
